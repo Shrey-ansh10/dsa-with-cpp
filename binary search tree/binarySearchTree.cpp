@@ -57,12 +57,31 @@ public:
     }
 
     void inorder(Node* n) {
-    if (!n) return;
-    inorder(n->left);
-    cout << n->val << ' ';
-    inorder(n->right);
-}
+        if (!n) return;
 
+        inorder(n->left); 
+        cout << n->val << ' ';
+        inorder(n->right);
+    }
+
+    // search functionality - Now the search can be implemented in 2 ways
+    // 1. Search the value and return that node that contains that value
+    // 2. Search the value and return true if that is found.
+
+    bool search(Node* root, int data){
+        // if not found and we reach a root of null node
+        if(root == nullptr){
+            return false;
+        }
+
+        // value found
+        if(root->val == data){
+            return true;
+        }
+        
+        return (data < root->val) ? search(root->left, data) : search(root->right, data);
+        
+    }
 };
 
 
@@ -77,5 +96,15 @@ int main(){
 
     // print tree
     tree.inorder(root);
+
+    // Search Functionality test by searching a value
+    
+    // Readable way 
+    bool ans = tree.search(root, 15);
+    if(ans) cout << "True" << endl;
+    else cout<< "False" << endl;
+
+    // short hand way
+    tree.search(root, 15) ? cout << "True" << endl : cout <<"False" << endl;
 
 }

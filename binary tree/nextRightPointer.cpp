@@ -80,7 +80,7 @@ public:
 
                 //current's right to left of next's
                 if(curr->next) curr->right->next = curr->next->left;
-                else curr->right = nullptr; // if it's the rightmost node at a level - point it's next to null
+                else curr->right->next = nullptr; // if it's the rightmost node at a level - point it's next to null
 
                 curr = curr->next; // update the current to the next node on same level
             }

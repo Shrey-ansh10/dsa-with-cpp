@@ -1,7 +1,8 @@
 // LC : 1008 Construct a BST from the given preorder sequence 
-// Constrains : 
-
-
+// Constrains : It is guaranteed that there is always possible to find a binary search tree with the given requirements for the given test cases.
+            //  1 <= preorder.length <= 100
+            //  1 <= preorder[i] <= 1000
+            //  All the values of preorder are unique.
 
 #include<iostream>
 using namespace std;

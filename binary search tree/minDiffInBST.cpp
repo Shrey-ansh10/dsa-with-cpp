@@ -3,14 +3,7 @@
 #include<iostream>
 using namespace std;
 
-struct TreeNode {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
+#include "../tree_node.h"
 
 
 // As we know that if we have a valid BST, we can do a inorder travelral on it and get the values in a sorted order.

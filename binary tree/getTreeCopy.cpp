@@ -13,12 +13,7 @@
 #include<iostream>
 using namespace std;
 
-struct TreeNode {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
+#include "../tree_node.h"
 
 TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
         // the target is a reference to node in the opriginal tree

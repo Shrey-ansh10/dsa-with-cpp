@@ -4,12 +4,12 @@
 #include <vector>
 #include "tree_node.h"
 
-using namespace std;
-
 class sortedArrayToBSTSol{
     public:
-        TreeNode* buildTree(vector<int>& nums, int st, int end);
         TreeNode* sortedArrayToBST(vector<int>& nums);
+
+    private:
+        TreeNode* buildTree(vector<int>& nums, int st, int end);
 };
 
 #endif

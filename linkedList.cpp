@@ -11,7 +11,7 @@ public: // properties of the new node
 
     Node(int val){ //constructor - creates the node object and assigning value to it's variable properties
         data = val; // storing the data in it
-        next = NULL; // pointer to next node - will always be null when new node is created
+        next = nullptr; // pointer to next node - will always be null when new node is created
     }
 };
 
@@ -20,9 +20,34 @@ class List{
     Node* head; // head pointer to point to the start of the list
     Node* tail; // tail pointer to point the last element of list
 
+    // clear function will be used by destructor, to delete the list and clear the memory
+    void clear() {
+        Node* current = head;
+
+        // deleting all the nodes
+        while (current != nullptr) {
+            Node* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+
+        // setting the head and tail to null
+        head = nullptr;
+        tail = nullptr;
+    }
+    
 public:
     List(){ // initlizing the list
-        head = tail = NULL;  // both head and tail point to NULL meaning the list is empty
+        head = tail = nullptr;  // both head and tail point to NULL meaning the list is empty
+    }
+
+    // return head
+    const Node* getHead() const{
+        return head;
+    }
+
+    const Node* getTail() const{
+        return tail;
     }
 
     // Functions we need for out list
@@ -33,22 +58,20 @@ public:
         Node* newNode = new Node(val);
 
          // Case 1: when there's no element in the list
-        if(tail == NULL){
+        if(tail == nullptr){
             head = tail = newNode;  //both point to this newly created node
             return;
         }else{ // Case 2: atleast 1 element or more
             tail->next = newNode;
             tail = newNode;
         }
-
-
     }
 
     // 2. pop_back() : to remove the last elements of the list
     void pop_back(){ // O(n)
         // to perform deletion from the end of the linked list, we will need to traverse from head to second last node of the list; update the pointer of this second last node to NULL; store the last node in some tempStore, update tail node, delete the tempStore;
         
-        if(tail == NULL){
+        if(tail == nullptr){
             cout << "empty linked list" << endl;
             return ;
         }else{
@@ -65,7 +88,7 @@ public:
             // delete temp; // delete the last node - temp will point to some garbage value
 
             // Approach 2 : to delete last node and update tail
-            temp->next = NULL; // remove connection with the last element 
+            temp->next = nullptr; // remove connection with the last element 
             delete tail; // delete the tail node - but tail pointer still stays and points to some garbage value
             tail = temp; // therefore update the tail pointer to temp           
         }
@@ -79,7 +102,7 @@ public:
         Node* newNode = new Node(val); // created a pointer of type Node, that points to newly created node object. The new node is created using Node class
             
         // Case 1: when there's no element in the list
-        if(head == NULL){
+        if(head == nullptr){
             head = tail = newNode;  //both point to this newly created node
             return;
         }else{  // Case 2 : list contains one or more object
@@ -91,13 +114,13 @@ public:
     
     // 4. pop_front() :
     void pop_front(){ //O(1)
-        if(head == NULL){
+        if(head == nullptr){
             cout << "empty linked list" << endl;
             return ;
         }else{
             Node* temp = head; //creating a temp pointer to point at first node - this will be used to delete data from the node
             head = head->next; // updating the head to the next node in the list
-            temp->next = NULL; // removing pointer to next node
+            temp->next = nullptr; // removing pointer to next node
             delete temp; // delete node that temp points at
         }
     }
@@ -105,7 +128,7 @@ public:
     // print function to print the linkedlist
     void printLL(){ //O(n)
         Node* temp=head;
-        while(temp != NULL){
+        while(temp != nullptr){
             cout << temp->data << " " ; //print the data at this node
             temp = temp->next; // update temp pointer
         }
@@ -126,7 +149,7 @@ public:
         Node* temp = head; // pointer
 
         for(int i=0; i<pos-1; i++){ 
-            if(temp->next == NULL){ 
+            if(temp->next == nullptr){ 
                 cout << "Invalid position!!!\n" << pos <<  " exceeds end of LL. \nMax value of pos can be " << i+1 << endl;
                 return;
             }
@@ -142,16 +165,21 @@ public:
     void search(int val){ // O(n)
         Node* temp = head;
         int pos=1;
-        while (temp != NULL){
+        while (temp != nullptr){
             if(temp->data == val){
                 cout << "Found Value at position : " << pos << endl;
             }
             temp = temp->next; //moving to next element
             pos++; //increment 
         }
-        if(temp == NULL){
+        if(temp == nullptr){
             cout << "value doesn't exist in the LL." << endl;
         }
+    }
+
+    // Destructor
+    ~List(){
+        clear(); // calls the clear function which deletes all the nodes in the list
     }
 
 };
